@@ -4,4 +4,4 @@ global.log = new Logger();
 
 //Load/Start Backend
 const Bright = require('./classes/Bright.js');
-global.bright = new Bright(3000);
+global.bright = new Bright();

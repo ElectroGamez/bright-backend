@@ -4,7 +4,7 @@ class Bright {
     constructor(port) {
         this.restify = new Restify();
         this.restify.createListeners();
-        this.restify.listen();
+        this.restify.listen(port);
     }
 }
 
