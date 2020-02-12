@@ -6,7 +6,20 @@ class Restify {
     }
 
     createListeners() {
-        this.server.get('/echo/:name', function (req, res, next) {
+        this.server.get('/api/light', function (req, res, next) {
+            //tmp, for testing
+            global.bright.database.query("CREATE TABLE test(name VARCHAR(32), pet VARCHAR(32);", res => {
+                console.log(res);
+            })
+
+            global.bright.database.query("INSERT INTO test(name, pet) VALUES('testperson', 'dog');", res => {
+                console.log(res);
+            })
+
+            global.bright.database.query("SELECT * FROM test;", res => {
+                console.log(res);
+            })
+
             res.send(req.params);
             return next();
         });
