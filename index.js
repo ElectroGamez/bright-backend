@@ -1,4 +1,4 @@
-//Load/Start Backend
+//Load/Start Logger
 const Logger = require('./classes/Logger.js');
 global.log = new Logger();
 
