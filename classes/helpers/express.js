@@ -3,7 +3,7 @@ function make(app) {
 
     app.get('/', (req, res) => {
         res.send("works.");
-        global.bright.log.error("wowoow!");
+        global.bright.log.debug("wowoow!");
     })
 }
 

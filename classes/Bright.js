@@ -1,6 +1,6 @@
 const express = require('express');
-const expressListeners = require('./listeners/express.js')
-const logListener = require('./listeners/logger.js')
+const expressListeners = require('./helpers/express.js')
+const logListener = require('./helpers/Logger.js')
 
 
 class Bright {
