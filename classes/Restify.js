@@ -1,12 +1,11 @@
 const restify = require('restify');
 const fs = require("fs");
 
-const Ajv = require('ajv');
-const ajv = new Ajv({ allErrors: true });
-
 class Restify {
     constructor(port) {
+        this.port = port;
         this.server = restifySetup();
+        this.reloading = false;
     }
 
     loadListeners() {
@@ -15,13 +14,28 @@ class Restify {
             files.forEach(file => {
                 let tmpItem = require(`./restifyListeners/${file}`);
                 this.server[tmpItem.type](tmpItem.url, tmpItem.execution);
-                tmpItem = null;
+                delete require.cache[require.resolve(`./restifyListeners/${file}`)];
             });
         });
     }
 
-    listen(port) {
-        this.server.listen(port || 3000, () => {
+    reload() {
+        if (!this.reloading) {
+            this.reloading = true;
+            global.log.info("Restify reload started");
+            this.server.close(cb => {
+                delete this.server;
+                this.server = restifySetup();
+                this.loadListeners();
+                this.listen();
+                global.log.info("Restify reload finished");
+                this.reloading = false;
+            });
+        } else global.log.error("Restify reload already started");
+    }
+
+    listen() {
+        this.server.listen(this.port || 3000, () => {
             global.log.info('Restify server listening on port ' + this.server.url);
         });
     }
