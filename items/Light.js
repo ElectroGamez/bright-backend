@@ -12,6 +12,8 @@ class Light {
     off() {
         this.power = false;
     }
+
+    
 }
 
 //temporary Light object for testing.

@@ -1,21 +1,21 @@
 const restify = require('restify');
+const fs = require("fs");
+
+const Ajv = require('ajv');
+const ajv = new Ajv({ allErrors: true });
 
 class Restify {
     constructor(port) {
         this.server = restifySetup();
     }
 
-    createListeners() {
-        this.server.get('/api/light', function (req, res, next) {
-            //tmp, for testing
-            global.bright.database.query("SELECT * FROM lights;")
-            .then((result) => {
-                res.send(result.rows);
-                return next();
-            })
-            .catch((error) => {
-                global.log.error("Database error, " + error);
-                return next(new Error('Internal server error.'));
+    loadListeners() {
+        fs.readdir("./classes/restifyListeners/", (err, files) => {
+            if (err) throw new Error("Failed to load restify listeners." + err);
+            files.forEach(file => {
+                let tmpItem = require(`./restifyListeners/${file}`);
+                this.server[tmpItem.type](tmpItem.url, tmpItem.execution);
+                tmpItem = null;
             });
         });
     }
@@ -38,7 +38,7 @@ function restifySetup() {
     server.use(restify.plugins.queryParser());
     server.use(restify.plugins.bodyParser());
 
-    if (!server) throw new Error('Could not load server');
+    if (!server) throw new Error('Could not create restify server');
     return server;
 }
 
