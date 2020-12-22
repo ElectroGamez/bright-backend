@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "nodemon",
-    "start": "tsc && NODE_ENV=\"production\" node dist/index.js"
+    "start": "tsc && SCRIPT_FILES=\"js\" node dist/index.js"
   },
   "author": "",
   "license": "ISC",
