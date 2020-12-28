@@ -75,7 +75,7 @@ export const startServer = (port?: number): void => {
     app.use("/user", user);
     app.use("/device", device);
 
-    port = port || 3000;
+    port = port || 5000;
 
     app.use(errorHandler);
     app.listen(port, async () => {
