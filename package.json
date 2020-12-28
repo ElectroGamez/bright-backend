@@ -1,6 +1,6 @@
 {
   "name": "bright-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A smarthome system writen in Typescript for controlling stuff inside my house.",
   "main": "index.js",
   "scripts": {
