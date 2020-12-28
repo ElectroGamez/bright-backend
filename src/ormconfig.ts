@@ -13,7 +13,7 @@ const options: ConnectionOptions = {
     username: dbOptions.user,
     password: dbOptions.password,
     database: dbOptions.database ?? "default",
-    entities: ["{src,dist}/entities/*{.ts,.js}"],
+    entities: [`{${process.env.NODE_ENV == "production" ? "dist" : "src"}}/entities/*{.ts,.js}`],
     synchronize: true,
 };
 
