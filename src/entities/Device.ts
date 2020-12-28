@@ -1,4 +1,4 @@
-import { TasmotaInstance } from "../../Tasmota-Node/dist";
+import { TasmotaInstance } from "tasmota-node";
 
 import {
     Entity,

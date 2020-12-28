@@ -4,7 +4,7 @@ import { checkToken } from "../middlewares/jwt";
 import { Device } from "../entities/Device";
 import { RequestError } from "../express";
 
-import { PowerState } from "../../Tasmota-Node/dist";
+import { PowerState } from "tasmota-node";
 const router = Router();
 
 const getDeviceOrFail = async (id: string): Promise<Device> => {
