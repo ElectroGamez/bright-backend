@@ -7,6 +7,7 @@ import { startServer } from "./express";
 (async () => {
     // Starting DB connection
     await createConnection(typeormConfig);
+    console.log(typeormConfig);
     console.log("Database connection active");
 
     startServer();
